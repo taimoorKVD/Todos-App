@@ -52,10 +52,10 @@ class TodosController extends Controller
         return view('todos.edit')->with('todo', $todo);
     }
 
-    public function update(Request $request, $id)
+    public function update(Todo $todo)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|min:3|unique:todos,name,'.$id,
+        $validator = Validator::make(request()->all(), [
+            'name' => 'required|min:3|unique:todos,name,'.$todo->id,
             'description' => 'required|min:10',
         ]);
 
@@ -66,13 +66,12 @@ class TodosController extends Controller
                 ->withInput();
         }
 
-        $todo = Todo::find($id);
-        $todo->name = $request->name;
-        $todo->description = $request->description;
+        $todo->name = request()->name;
+        $todo->description = request()->description;
         $todo->save();
 
         return redirect()
-            ->route('todo.show',['todo' => $id])
+            ->route('todo.show',['todo' => $todo->id])
             ->with('message', 'Todo updated successfully');
     }
 
