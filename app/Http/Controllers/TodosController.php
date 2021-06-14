@@ -82,4 +82,14 @@ class TodosController extends Controller
             ->route('todo.index')
             ->with('message', 'Todo deleted successfully!');
     }
+
+    public function markAsCompleted(Todo $todo)
+    {
+        $todo->status = true;
+        $todo->save();
+
+        return redirect()
+            ->route('todo.index')
+            ->with('message', 'Todo completed successfully!');
+    }
 }

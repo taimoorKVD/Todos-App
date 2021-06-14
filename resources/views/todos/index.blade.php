@@ -27,7 +27,10 @@
                                     @if(date('Y-m-d h:i', strtotime($todo->created_at)) == date('Y-m-d h:i'))
                                         <span class="badge badge-warning">New</span>
                                     @endif
-                                    <a href="{{ route('todo.show', [ 'todo' => $todo->id ]) }}" class="btn btn-primary btn-sm float-right">View</a>
+                                    @if($todo->status == false)
+                                        <a href="{{ route('todo.markAsCompleted', [ 'todo' => $todo->id ]) }}" class="btn btn-warning btn-sm float-right">Complete</a>
+                                    @endif
+                                    <a href="{{ route('todo.show', [ 'todo' => $todo->id ]) }}" class="btn btn-primary btn-sm float-right mr-2">View</a>
                                 </li>
                             @endforeach
                         @else

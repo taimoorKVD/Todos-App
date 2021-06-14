@@ -25,4 +25,5 @@ Route::group([ 'prefix' => 'todos', 'as' => 'todo.'], function(){
     Route::get('/edit/{todo}', ['as' => 'edit', 'uses' => 'TodosController@edit']);
     Route::post('/update/{todo}', ['as' => 'update', 'uses' => 'TodosController@update']);
     Route::get('/delete/{todo}', ['as' => 'delete', 'uses' => 'TodosController@destroy']);
+    Route::get('/markAsCompleted/{todo}', ['as' => 'markAsCompleted', 'uses' => 'TodosController@markAsCompleted']);
 });
